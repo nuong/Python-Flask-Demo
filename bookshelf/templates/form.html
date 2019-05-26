@@ -1,0 +1,63 @@
+{% extends "base.html" %}
+
+{% block content %}
+<h3>{{action}} book</h3>
+ {% for message in get_flashed_messages() %}
+    <div class="flash alert alert-danger">{{ message }}</div>
+  {% endfor %}
+<form method="POST" enctype="multipart/form-data">
+
+  <div class="form-group">
+    <label for="title">Title</label>
+    <input type="text" name="title" id="title" value="{{book.title}}" class="form-control"/>
+  </div>
+
+  <div class="form-group">
+    <label for="author">Author</label>
+    <input type="text" name="author" id="author" value="{{book.author}}" class="form-control"/>
+  </div>
+
+  <div class="form-group">
+    <label for="publishedDate">Date Published</label>
+    <input type="text" name="publishedDate" id="publishedDate" value="{{book.publishedDate}}" class="form-control"/>
+  </div>
+
+  <div class="form-group">
+    <label for="description">Description</label>
+    <textarea name="description" id="description" class="form-control">{{book.description}}</textarea>
+  </div>
+
+  <div class="form-group">
+    <label for="image">Cover Image</label>
+    <input type="file" name="image" id="image" class="form-control"/>
+  </div>
+
+  <div class="form-group hidden">
+    <label for="imageUrl">Cover Image URL</label>
+    <input type="text" name="imageUrl" id="imageUrl" value="{{book.imageUrl}}" class="form-control"/>
+  </div>
+
+  <div class="form-group">
+    <label for="imageUrl">Types</label>
+    <select name="types" multiple class="form-control">
+      {% for type in types %}
+      <option value="{{type.id}}"{% if type.selected == True %} selected="selected"{% endif %}>{{type.value}} {{type.selected}}</option>
+      {% endfor %}
+    </select>
+    <a role="button" class="btn" onclick="addNewType()">+ Add Type</a>
+  </div>
+
+  <div class="form-group hidden">
+    <label for="createdBy">Created by</label>
+    <input type="text" name="createdBy" id="createdBy" value="{{book.createdBy}}" class="form-control"/>
+  </div>
+
+  <div class="form-group hidden">
+    <label for="createdById">Created by ID</label>
+    <input type="text" name="createdById" id="createdById" value="{{book.createdById}}" class="form-control"/>
+  </div>
+
+  <button type="submit" class="btn btn-success mb-2">Save</button>
+</form>
+ <script src="/static/script.js"></script>
+{% endblock %}

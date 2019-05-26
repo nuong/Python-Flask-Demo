@@ -1,0 +1,35 @@
+{% extends "base.html" %}
+
+{% block content %}
+<a href="/books/add" class="btn btn-success btn-sm mb-2">
+  <i class="glyphicon glyphicon-plus"></i>
+  Add book
+</a>
+<div class="row">
+{% for book in books %}
+<div class="col-xs-12 col-sm-3">
+<div class="card">
+  <a href="/books/{{book.id}}">
+    <div class="image" style="background-image: url({{ book.imageUrl if book.imageUrl else 'https://d3i6fh83elv35t.cloudfront.net/static/2018/08/Books_HD_8314929977-1024x682.jpg'}})">
+    </div>
+    <div class="pa-2">
+      <h4>{{book.title}}</h4>
+      <p>{{book.author}}</p>
+    </div>
+  </a>
+  </div>
+</div>
+
+{% else %}
+<p>No books found</p>
+{% endfor %}
+</div>
+{% if next_page_token %}
+<nav>
+  <ul class="pager">
+    <li><a href="?page_token={{next_page_token}}">More</a></li>
+  </ul>
+</nav>
+{% endif %}
+
+{% endblock %}
