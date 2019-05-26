@@ -9,6 +9,9 @@ instance/
 .coverage
 htmlcov/
 
+my_config.py
+
 dist/
 build/
 *.egg-info/
+my_config.py
